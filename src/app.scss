@@ -38,18 +38,31 @@
 
                     .period {
                         position: absolute;
-                        height: 10px;
+                        height: 8px;
 
                         &.semis {
                             background: blue;
-                        }
-
-                        &.semisdirect {
-                            background: red;
+                            top: 5px;
                         }
 
                         &.repiquage {
                             background: violet;
+                            top: 15px;
+                        }
+
+                        &.plantage {
+                            background: green;
+                            top: 25px;
+                        }
+
+                        &.semisdirect {
+                            background: red;
+                            top: 35px;
+                        }
+
+                        &.recolte {
+                            background: rgb(0, 204, 255);
+                            top: 45px;
                         }
                     }
                 }
