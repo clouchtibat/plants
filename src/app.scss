@@ -1,0 +1,92 @@
+.app {
+    width: calc(100% - 40px);
+    margin: 20px 20px;
+
+    $name-width: 300px;
+    $ord-color: #d8d8d8;
+
+    .chart {
+        position: relative;
+        width: 100%;
+        padding: 0 0 40px;
+
+        .plants {
+            position: relative;
+            z-index: 1;
+
+            .plant {
+                height: 60px;
+                width: 100%;
+                border: 1px solid #f8f8f8;
+                border-width: 1px 0;
+
+                .name {
+                    display: inline-block;
+                    width: $name-width;
+                    height: 60px;
+                    line-height: 60px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .periods {
+                    display: inline-block;
+                    position: relative;
+                    width: calc(100% - #{$name-width});
+                    height: 100%;
+
+                    .period {
+                        position: absolute;
+                        height: 10px;
+
+                        &.semis {
+                            background: blue;
+                        }
+
+                        &.semisdirect {
+                            background: red;
+                        }
+
+                        &.repiquage {
+                            background: violet;
+                        }
+                    }
+                }
+            }
+        }
+
+        .ords {
+            position: absolute;
+            width: calc(100% - #{$name-width});
+            height: 100%;
+            right: 0;
+            bottom: 0;
+            white-space: nowrap;
+
+            .month {
+                position: relative;
+                height: 100%;
+                display: inline-block;
+                vertical-align: bottom;
+
+                .line {
+                    position: absolute;
+                    width: 50%;
+                    height: calc(100% - 25px);
+                    border-right: 1px solid $ord-color;
+                    bottom: 25px;
+                }
+
+                .name {
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    text-align: center;
+                    color: $ord-color
+                }
+
+            }
+        }
+    }
+}
