@@ -1,68 +1,25 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
+import { months, periods, unit } from './constants';
+import { sortMapper } from './utils';
 import originalPlants from './plants';
 
 import './app.scss';
 
-const months = [
-	'Janvier',
-	'Février',
-	'Mars',
-	'Avril',
-	'Mai',
-	'Juin',
-	'Juillet',
-	'Aout',
-	'Septembre',
-	'Octobre',
-	'Novembre',
-	'Decembre'
-];
-
-const unit = Math.floor(100 / 12);
-
-const sortFunctions = {
-	name: asc => (a, b) => {
-		let result = 0;
-		if (a.name < b.name) {
-			result = -1;
-		}
-		if (a.name > b.name) {
-			result = 1;
-		}
-		return result * (asc ? -1 : 1);
-	},
-	date: (period, which, asc) => (a, b) => {
-		const periodA = a.periods[period] || [-1, -1];
-		const periodB = b.periods[period] || [-1, -1];
-		return (periodA[which] - periodB[which]) * (asc ? -1 : 1);
-	}
-};
-
-const sortMapper = (value, asc) => {
-	const [key, which] = value.split('_');
-	console.log('sortMapper');
-	console.log(key);
-	console.log(which);
-	switch (key) {
-		case 'semis':
-		case 'semisDirect':
-		case 'repiquage':
-		case 'plantage':
-		case 'recolte':
-			return sortFunctions.date(key, parseInt(which, 10), asc);
-		default:
-			return sortFunctions.name(asc);
-	}
-};
-
 class App extends Component {
 	constructor() {
 		super();
+
+		const displays = {};
+		periods.forEach(({ id }) => {
+			displays[id] = true;
+		});
+
 		this.state = {
 			sort: 'name',
-			asc: false
+			asc: false,
+			displays
 		};
 	}
 
@@ -77,38 +34,70 @@ class App extends Component {
 		this.setState({ asc: !this.state.asc });
 	};
 
+	onCheck = param => {
+		console.log('check init');
+		return e => {
+			console.log('check change');
+			console.log(param);
+			this.setState({
+				displays: {
+					...this.state.displays,
+					[param]: !this.state.displays[param]
+				}
+			});
+		};
+	};
+
 	render() {
-		const { onSort, onChangeOrder } = this;
-		const { sort, asc } = this.state;
-		console.log('render', sort, asc);
+		const { onSort, onChangeOrder, onCheck } = this;
+		const { sort, asc, displays } = this.state;
+		console.log('render', sort, asc, this.state);
+
+		const plants = [...originalPlants]
+			.filter(e => Object.keys(e.periods).find(f => !!displays[f]))
+			.sort(sortMapper(sort, asc));
+
 		return (
 			<div className="app">
 				<div className="header">
-					<select onChange={onSort}>
-						<option value="name">Nom</option>
-						<optgroup label="Semis">
-							<option value="semis_0">Début</option>
-							<option value="semis_1">Fin</option>
-						</optgroup>
-						<optgroup label="Semis direct">
-							<option value="semisDirect_0">Début</option>
-							<option value="semisDirect_1">Fin</option>
-						</optgroup>
-						<optgroup label="Plantage">
-							<option value="plantage_0">Début</option>
-							<option value="plantage_1">Fin</option>
-						</optgroup>
-						<optgroup label="Récolte">
-							<option value="recolte_0">Début</option>
-							<option value="recolte_1">Fin</option>
-						</optgroup>
-					</select>
-					<button onClick={onChangeOrder}>order</button>
+					<div className="container">
+						<span className="label">Trier par:</span>
+						<select className="select" onChange={onSort}>
+							<option value="name">Nom</option>
+							{periods.map(({ id, name }) => (
+								<optgroup label={name}>
+									<option value={id + '_0'}>Début</option>
+									<option value={id + '_1'}>Fin</option>
+								</optgroup>
+							))}
+						</select>
+						<button className={classNames('button order', { asc })} onClick={onChangeOrder}>
+							&darr;
+						</button>
+					</div>
+
+					<div className="container period-choices">
+						<span className="label">Afficher:</span>
+						{periods.map(({ id, name }) => (
+							<div
+								key={id}
+								className={classNames('period-choice', id.toLowerCase(), { selected: displays[id] })}
+								onClick={onCheck(id)}
+							>
+								{name}
+							</div>
+						))}
+					</div>
 				</div>
 				<div className="chart">
 					<div className="plants">
-						{[...originalPlants].sort(sortMapper(sort, asc)).map(({ id, name, periods }, index) => (
-							<div key={id} className="plant">
+						{plants.map(({ id, name, periods }, index) => (
+							<div
+								key={id}
+								className={classNames('plant', {
+									displayed: Object.keys(periods).find(e => displays[e])
+								})}
+							>
 								<div className="name" title={name}>
 									{name}
 								</div>
@@ -116,7 +105,9 @@ class App extends Component {
 									{Object.keys(periods).map(key => (
 										<div
 											key={key}
-											className={classNames('period', key.toLowerCase())}
+											className={classNames('period', key.toLowerCase(), {
+												displayed: displays[key]
+											})}
 											style={{
 												width: unit * (periods[key][1] - periods[key][0]) + '%',
 												left: unit / 2 + periods[key][0] * unit + '%'
@@ -130,8 +121,9 @@ class App extends Component {
 					<div className="ords">
 						{months.map((month, index) => (
 							<div key={month} className="month" style={{ width: Math.floor(100 / 12) + '%' }}>
-								<div className="name">{month}</div>
+								<div className="name top">{month}</div>
 								<div className="line" />
+								<div className="name">{month}</div>
 							</div>
 						))}
 					</div>

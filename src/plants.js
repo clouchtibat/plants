@@ -36,7 +36,7 @@ export default [
 		name: 'Cardon Plein Blanc Inerme',
 		periods: {
 			semisDirect: [4, 5],
-			recolte: [0, 11]
+			recolte: [0, 13]
 		}
 	},
 	{
