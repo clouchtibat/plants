@@ -2,11 +2,20 @@
     $name-width: 250px;
     $ord-color: #ccc;
 
+    /*
+
     $semis: blue;
     $repiquage: violet;
-    $plantage: green;
+    $plantation: green;
     $semisdirect: red;
     $recolte: rgb(0, 204, 255);
+    */
+
+    $semis: #4D0BFF;
+    $semisdirect: #18B4E8;
+    $repiquage: rgb(38, 173, 63);
+    $plantation: #E8E22B;
+    $recolte: #FF9709;
 
     width: calc(100% - 20px);
     margin: 20px 0 20px 20px;
@@ -56,11 +65,34 @@
         }
     }
 
+    .input {
+        background: white;
+        height: 21px;
+        line-height: 25px;
+        font-size: 16px;
+        min-width: 200px;
+        margin: 0;
+        padding: 0 3px;
+
+        &:hover {
+            border-color: #ccc;
+            box-shadow: none;
+        }
+    }
+
     .header {
         padding: 0 0 30px;
 
         .container {
-            margin: 0 0 20px
+            margin: 0 0 20px;
+
+            &.inline {
+                display: inline-block;
+            }
+
+            &.search {
+                margin: 0 50px 0 0;
+            }
         }
 
         .button.order {
@@ -71,6 +103,12 @@
             &.asc {
                 transform: rotate(180deg)
             }
+        }
+
+        .button.reset {
+            margin: 0 0 0 10px;
+            width: 25px;
+            line-height: 20px;
         }
 
         .period-choices {
@@ -98,11 +136,11 @@
                     }
                 }
 
-                &.plantage {
-                    color: $plantage;
+                &.plantation {
+                    color: $plantation;
 
                     &::before {
-                        border-color: $plantage;
+                        border-color: $plantation;
                     }
                 }
 
@@ -167,7 +205,7 @@
             .plant {
                 height: 60px;
                 width: 100%;
-                border: 1px solid #f8f8f8;
+                border: 1px solid #f1f1f1;
                 border-width: 1px 0;
                 display: none;
 
@@ -210,8 +248,8 @@
                             top: 15px;
                         }
 
-                        &.plantage {
-                            background: $plantage;
+                        &.plantation {
+                            background: $plantation;
                             top: 25px;
                         }
 

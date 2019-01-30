@@ -5,7 +5,7 @@ export default [
 		periods: {
 			semis: [3.5, 5],
 			repiquage: [4.5, 5],
-			plantage: [6.9, 7],
+			plantation: [6.9, 7],
 			recolte: [10.9, 12]
 		}
 	},
@@ -52,7 +52,7 @@ export default [
 		name: 'Laitue de printemps Appia',
 		periods: {
 			semis: [1, 2],
-			plantage: [3, 4],
+			plantation: [3, 4],
 			semisDirect: [3, 4]
 		}
 	},
@@ -68,7 +68,7 @@ export default [
 		name: 'Courge Musquée Muscade',
 		periods: {
 			semis: [2, 3],
-			plantage: [4, 6],
+			plantation: [4, 6],
 			semisDirect: [4.5, 5],
 			recolte: [8.5, 10]
 		}
@@ -79,7 +79,7 @@ export default [
 		periods: {
 			semis: [2, 3.3],
 			repiquage: [2.5, 3.8],
-			plantage: [4.5, 4.8]
+			plantation: [4.5, 4.8]
 		}
 	},
 	{
@@ -88,7 +88,7 @@ export default [
 		periods: {
 			semis: [2, 3.3],
 			repiquage: [2.5, 3.8],
-			plantage: [4.5, 4.8]
+			plantation: [4.5, 4.8]
 		}
 	},
 	{

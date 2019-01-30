@@ -34,6 +34,17 @@ class App extends Component {
 		this.setState({ asc: !this.state.asc });
 	};
 
+	onSearch = e => {
+		console.log('on search');
+		console.log(e.target.value);
+		this.setState({ search: e.target.value });
+	};
+
+	onSearchReset = () => {
+		console.log('on search reset');
+		this.setState({ search: '' });
+	};
+
 	onCheck = param => {
 		console.log('check init');
 		return e => {
@@ -49,18 +60,29 @@ class App extends Component {
 	};
 
 	render() {
-		const { onSort, onChangeOrder, onCheck } = this;
-		const { sort, asc, displays } = this.state;
+		const { onSort, onChangeOrder, onCheck, onSearchReset, onSearch } = this;
+		const { sort, asc, displays, search } = this.state;
 		console.log('render', sort, asc, this.state);
+		const regex = search ? RegExp(`.*${search}.*`, 'ig') : false;
 
 		const plants = [...originalPlants]
-			.filter(e => Object.keys(e.periods).find(f => !!displays[f]))
+			.filter(
+				e =>
+					(regex ? regex.test(e.name.toLowerCase()) : true) && Object.keys(e.periods).find(f => !!displays[f])
+			)
 			.sort(sortMapper(sort, asc));
 
 		return (
 			<div className="app">
 				<div className="header">
-					<div className="container">
+					<div className="container inline search">
+						<span className="label">Rechercher:</span>
+						<input type="text" className="input" value={search} onChange={onSearch} />
+						<button className={classNames('button reset', { asc })} onClick={onSearchReset}>
+							&times;
+						</button>
+					</div>
+					<div className="container inline">
 						<span className="label">Trier par:</span>
 						<select className="select" onChange={onSort}>
 							<option value="name">Nom</option>

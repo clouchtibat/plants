@@ -17,7 +17,7 @@ export const periods = [
 	{ id: 'semis', name: 'Semis' },
 	{ id: 'semisDirect', name: 'Semis direct' },
 	{ id: 'repiquage', name: 'Repiquage' },
-	{ id: 'plantage', name: 'Plantage' },
+	{ id: 'plantation', name: 'Plantation' },
 	{ id: 'recolte', name: 'Récolte' }
 ];
 
