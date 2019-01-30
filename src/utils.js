@@ -12,9 +12,18 @@ export const sortFunctions = {
 		return result * (asc ? -1 : 1);
 	},
 	date: (period, which, asc) => (a, b) => {
-		const periodA = a.periods[period] || [-1, -1];
-		const periodB = b.periods[period] || [-1, -1];
-		return (periodA[which] - periodB[which]) * (asc ? -1 : 1);
+		const periodA = a.periods[period];
+		const periodB = b.periods[period];
+		if (periodA && periodB) {
+			return (periodA[which] - periodB[which]) * (asc ? -1 : 1);
+		}
+		if (!periodA) {
+			return 1;
+		}
+		if (!periodB) {
+			return -1;
+		}
+		return 0;
 	}
 };
 
