@@ -163,7 +163,7 @@ export default [
 		}
 	},
 	{
-		id: 'a20',
+		id: 'a21',
 		name: 'Mâche verte de Cambrai',
 		periods: {
 			semisDirect: [7, 9],
@@ -171,35 +171,35 @@ export default [
 		}
 	},
 	{
-		id: 'a21',
+		id: 'a22',
 		name: 'Courge Pépo Spaghetti',
 		periods: {
 			semisDirect: [4, 5]
 		}
 	},
 	{
-		id: 'a22',
+		id: 'a23',
 		name: 'Courgette Gold Rush',
 		periods: {
 			semisDirect: [4, 5]
 		}
 	},
 	{
-		id: 'a23',
+		id: 'a24',
 		name: 'Pois à Rames à écosser Téléphone',
 		periods: {
 			semisDirect: [1, 4]
 		}
 	},
 	{
-		id: 'a24',
+		id: 'a25',
 		name: 'Betterave Rouge Globe Améliorée 2',
 		periods: {
 			semisDirect: [3.8, 6.2]
 		}
 	},
 	{
-		id: 'a25',
+		id: 'a26',
 		name: 'Carotte Rodelika',
 		periods: {
 			semisDirect: [2, 5],
@@ -207,7 +207,7 @@ export default [
 		}
 	},
 	{
-		id: 'a26',
+		id: 'a27',
 		name: 'Haricot Nain la Victoire',
 		periods: {
 			semisDirect: [3.5, 6.5],
@@ -215,7 +215,7 @@ export default [
 		}
 	},
 	{
-		id: 'a27',
+		id: 'a28',
 		name: 'Haricot Morgane',
 		periods: {
 			semisDirect: [3.5, 6.5],

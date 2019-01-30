@@ -63,7 +63,7 @@ class App extends Component {
 		const { onSort, onChangeOrder, onCheck, onSearchReset, onSearch } = this;
 		const { sort, asc, displays, search } = this.state;
 		console.log('render', sort, asc, this.state);
-		const regex = search ? RegExp(`.*${search}.*`, 'ig') : false;
+		const regex = search ? RegExp(`.*${search}.*`, 'i') : false;
 
 		const plants = [...originalPlants]
 			.filter(
